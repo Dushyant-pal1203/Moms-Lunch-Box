@@ -40,7 +40,7 @@ export function CtaBanner() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="button-cta-order"
-                className="inline-flex items-center gap-3 bg-white hover:bg-amber-50 text-green-700 font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="inline-flex items-center gap-3 bg-white hover:bg-amber-50 text-green-700 font-bold text-sm md:text-lg px-8 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -52,7 +52,7 @@ export function CtaBanner() {
                 Order on WhatsApp Now
               </a>
               <p className="mt-4 text-primary-foreground/50 text-xs">
-                +91 93100 04022 · Orders accepted till 10 AM daily
+                +91 93100 04022 · Orders accepted till 10 PM daily
               </p>
             </div>
           </div>
