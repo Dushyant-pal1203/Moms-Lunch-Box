@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "wouter";
 import { Phone, ArrowLeft, Star, Leaf, Heart } from "lucide-react";
 import { FloatingWhatsApp } from "@/components/common/FloatingWhatsApp";
@@ -7,24 +7,6 @@ import { Footer } from "@/components/common/Footer";
 import { MenuCard, MenuFilters, HowToOrderSection } from "@/components/menu";
 import { menuItems, categories, type Category } from "@/lib/menuData";
 import { GENERAL_ORDER_LINK } from "@/lib/constants";
-
-function useInView() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setInView(true);
-      },
-      { threshold: 0.1 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return { ref, inView };
-}
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
@@ -50,40 +32,20 @@ export default function Menu() {
     {} as Record<Category, number>,
   );
 
+  // Debug logs to check filtering
+  console.log("Active Category:", activeCategory);
+  console.log("Search term:", search);
+  console.log("Total menu items:", menuItems.length);
+  console.log("Filtered items count:", filtered.length);
+  console.log(
+    "Filtered items:",
+    filtered.map((f) => f.name),
+  );
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <FloatingWhatsApp />
       <Navbar />
-
-      {/* Header */}
-      {/* <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border shadow-sm mt-16">
-        <div className="container-fluid h-16 flex items-center justify-between gap-4">
-          <Link
-            href="/"
-            data-testid="link-back-home"
-            className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors shrink-0"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm font-medium hidden sm:block">Home</span>
-          </Link>
-          <h1
-            className="font-display font-bold text-xl text-foreground"
-            data-testid="heading-menu-header"
-          >
-            Our Menu
-          </h1>
-          <a
-            href={GENERAL_ORDER_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-testid="button-header-order"
-            className="flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-200 shrink-0 shadow-sm"
-          >
-            <Phone className="w-3.5 h-3.5" />
-            <span>Order</span>
-          </a>
-        </div>
-      </header> */}
 
       <div className="container-fluid">
         {/* Page Title */}
@@ -99,6 +61,7 @@ export default function Menu() {
               />
             </div>
           </div>
+
           <h2
             className="font-display text-4xl md:text-5xl font-bold text-foreground mb-2"
             data-testid="heading-menu-title"
@@ -134,14 +97,9 @@ export default function Menu() {
         {/* Menu Grid */}
         {filtered.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
-            {filtered.map((item, i) => {
-              const { ref, inView } = useInView();
-              return (
-                <div key={item.id} ref={ref}>
-                  <MenuCard item={item} index={i} inView={inView} />
-                </div>
-              );
-            })}
+            {filtered.map((item, i) => (
+              <MenuCard key={item.id} item={item} index={i} inView={true} />
+            ))}
           </div>
         ) : (
           <div className="text-center py-16" data-testid="empty-search">

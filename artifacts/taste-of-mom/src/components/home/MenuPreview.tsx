@@ -67,7 +67,7 @@ export function MenuPreview() {
 
                   {/* Badges */}
                   {item.bestseller && (
-                    <span className="absolute top-3 right-3 flex items-center gap-1 bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
+                    <span className="absolute top-3 left-3 flex items-center gap-1 bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
                       <Star className="w-2.5 h-2.5 fill-white" /> Best Seller
                     </span>
                   )}
@@ -84,7 +84,7 @@ export function MenuPreview() {
 
                   {/* Tag */}
                   <span
-                    className={`absolute bottom-3 left-3 text-xs font-bold px-2.5 py-1 rounded-full ${item.tagColor} shadow-sm`}
+                    className={`absolute top-3 right-3 text-xs font-bold px-2.5 py-1 rounded-full ${item.tagColor} shadow-sm`}
                   >
                     {item.tag}
                   </span>

@@ -18,7 +18,7 @@ export function HowToOrderSection() {
         order already filled in!
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-6 justify-center items-start max-w-lg mx-auto mb-8">
+      <div className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-lg mx-auto mb-8">
         {[
           {
             n: "1",
@@ -65,7 +65,7 @@ export function HowToOrderSection() {
         Chat on WhatsApp
       </a>
       <p className="text-xs text-muted-foreground/70 mt-3">
-        +91 93100 04022 · Accept orders till 10 AM daily
+        +91 93100 04022 · Accept orders till 10 PM daily
       </p>
     </div>
   );
