@@ -1,0 +1,11 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter @workspace/taste-of-mom run build",
+  "outputDirectory": "dist/public",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "env": {
+    "BASE_PATH": "/",
+    "VERCEL": "1"
+  }
+}
