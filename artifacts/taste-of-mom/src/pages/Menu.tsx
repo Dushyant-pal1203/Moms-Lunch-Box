@@ -25,7 +25,8 @@ interface MenuItem {
   category: Category;
   tag: string;
   tagColor: string;
-  emoji: string;
+  image: string;
+  imageAlt?: string; // Added alt text for images
   bestseller?: boolean;
   spicy?: boolean;
 }
@@ -40,7 +41,8 @@ const menuItems: MenuItem[] = [
     category: "Thali",
     tag: "Best Seller",
     tagColor: "bg-amber-500 text-white",
-    emoji: "🍛",
+    image: "/menu-images/full-veg-thali.png",
+    imageAlt: "Full Veg Thali with roti, dal, sabzi and rice",
     bestseller: true,
   },
   {
@@ -52,7 +54,8 @@ const menuItems: MenuItem[] = [
     category: "Thali",
     tag: "Popular",
     tagColor: "bg-rose-500 text-white",
-    emoji: "🧀",
+    image: "/menu-images/paneer-special-thali.png",
+    imageAlt: "Paneer Special Thali with paneer sabzi and rice",
   },
   {
     id: 3,
@@ -63,7 +66,8 @@ const menuItems: MenuItem[] = [
     category: "Thali",
     tag: "Budget Friendly",
     tagColor: "bg-sky-500 text-white",
-    emoji: "🥘",
+    image: "/menu-images/mini-thali.png",
+    imageAlt: "Mini Thali with limited portions",
   },
   {
     id: 4,
@@ -74,7 +78,8 @@ const menuItems: MenuItem[] = [
     category: "Rice",
     tag: "Classic",
     tagColor: "bg-stone-600 text-white",
-    emoji: "🍚",
+    image: "/menu-images/dal-rice.png",
+    imageAlt: "Dal Rice with dal and steamed rice",
   },
   {
     id: 5,
@@ -85,7 +90,8 @@ const menuItems: MenuItem[] = [
     category: "Rice",
     tag: "Fan Favourite",
     tagColor: "bg-violet-600 text-white",
-    emoji: "🫘",
+    image: "/menu-images/rajma-chawal.png",
+    imageAlt: "Rajma Chawal with kidney beans curry and rice",
   },
   {
     id: 6,
@@ -96,7 +102,8 @@ const menuItems: MenuItem[] = [
     category: "Rice",
     tag: "Spicy",
     tagColor: "bg-red-500 text-white",
-    emoji: "🍲",
+    image: "/menu-images/chole-chawal.png",
+    imageAlt: "Chole Chawal with chickpea curry and rice",
     spicy: true,
   },
   {
@@ -108,7 +115,8 @@ const menuItems: MenuItem[] = [
     category: "Roti",
     tag: "Classic",
     tagColor: "bg-stone-600 text-white",
-    emoji: "🫓",
+    image: "/menu-images/roti-dal.png",
+    imageAlt: "Roti with dal and salad",
   },
   {
     id: 8,
@@ -119,7 +127,8 @@ const menuItems: MenuItem[] = [
     category: "Roti",
     tag: "Healthy",
     tagColor: "bg-emerald-600 text-white",
-    emoji: "🥙",
+    image: "/menu-images/roti-sabzi.png",
+    imageAlt: "Roti with seasonal vegetable sabzi",
   },
   {
     id: 9,
@@ -130,7 +139,8 @@ const menuItems: MenuItem[] = [
     category: "Special",
     tag: "Breakfast/Lunch",
     tagColor: "bg-orange-500 text-white",
-    emoji: "🥞",
+    image: "/menu-images/aloo-parathas.png",
+    imageAlt: "Aloo Paratha with yogurt and pickle",
     bestseller: true,
   },
   {
@@ -142,7 +152,8 @@ const menuItems: MenuItem[] = [
     category: "Special",
     tag: "High Protein",
     tagColor: "bg-indigo-500 text-white",
-    emoji: "🍳",
+    image: "/menu-images/paneer-bhurji.png",
+    imageAlt: "Paneer Bhurji with roti and chutney",
     spicy: true,
   },
   {
@@ -154,7 +165,8 @@ const menuItems: MenuItem[] = [
     category: "Special",
     tag: "Comfort Food",
     tagColor: "bg-teal-600 text-white",
-    emoji: "🫕",
+    image: "/menu-images/khichdi-kadhi.png",
+    imageAlt: "Khichdi with kadhi and papad",
   },
   {
     id: 12,
@@ -166,7 +178,8 @@ const menuItems: MenuItem[] = [
     category: "Special",
     tag: "Best Value",
     tagColor: "bg-primary text-primary-foreground",
-    emoji: "📦",
+    image: "/menu-images/weekday-pack.png",
+    imageAlt: "Weekly meal pack containing 5 thalis",
     bestseller: true,
   },
 ];
@@ -203,6 +216,9 @@ function MenuCard({ item, index }: { item: MenuItem; index: number }) {
   const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hi! I would like to order:\n*${item.name}* (${item.price})\n\nPlease confirm availability and delivery time. Thank you!`,
   )}`;
+
+  const [imageError, setImageError] = useState(false);
+
   return (
     <div
       ref={ref}
@@ -210,24 +226,36 @@ function MenuCard({ item, index }: { item: MenuItem; index: number }) {
       className={`group bg-card border border-card-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 flex flex-col ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       style={{ transitionDelay: `${(index % 3) * 80}ms` }}
     >
-      {/* Visual top */}
-      <div className="relative bg-linear-to-br from-amber-50 via-green-50/40 to-amber-50/80 flex items-center justify-center py-8 overflow-hidden">
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-br from-primary/5 to-amber-200/20" />
-        <span className="text-6xl group-hover:scale-110 transition-transform duration-400 relative z-10 drop-shadow-sm select-none">
-          {item.emoji}
-        </span>
+      {/* Image/Visual top */}
+      <div className="relative bg-linear-to-br from-amber-50 via-green-50/40 to-amber-50/80 h-auto overflow-hidden">
+        {!imageError ? (
+          <img
+            src={item.image}
+            alt={item.imageAlt || item.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={() => setImageError(true)}
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-6xl group-hover:scale-110 transition-transform duration-400 relative z-10 drop-shadow-sm select-none">
+              🍽️
+            </span>
+          </div>
+        )}
+
         {item.bestseller && (
           <span className="absolute top-3 right-3 flex items-center gap-1 bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
             <Star className="w-2.5 h-2.5 fill-white" /> Best Seller
           </span>
         )}
         {item.spicy && !item.bestseller && (
-          <span className="absolute top-3 left-3 flex items-center gap-1 text-red-600 text-xs font-bold">
+          <span className="absolute top-3 left-3 flex items-center gap-1 bg-white/90 backdrop-blur-sm text-red-600 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
             <Flame className="w-3.5 h-3.5 fill-red-500" /> Spicy
           </span>
         )}
         {item.spicy && item.bestseller && (
-          <span className="absolute top-3 left-3 flex items-center gap-1 text-red-600 text-xs font-bold">
+          <span className="absolute top-3 left-3 flex items-center gap-1 bg-white/90 backdrop-blur-sm text-red-600 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
             <Flame className="w-3.5 h-3.5 fill-red-500" /> Spicy
           </span>
         )}
@@ -343,7 +371,7 @@ export default function Menu() {
               <div className="absolute inset-0 bg-linear-to-br from-amber-400 to-green-600 rounded-full blur-xl opacity-20 scale-110" />
               <img
                 src="/logo.png"
-                alt="Logo"
+                alt="Taste of Mom's Hand Logo"
                 className="relative w-20 h-20 object-cover rounded-full shadow-md border-2 border-white/60"
                 data-testid="img-menu-logo"
               />
@@ -519,7 +547,7 @@ export default function Menu() {
         <div className="flex items-center justify-center gap-2 mb-2">
           <img
             src="/logo.png"
-            alt="Logo"
+            alt="Taste of Mom's Hand Logo"
             className="w-8 h-8 rounded-full object-contain opacity-80"
           />
           <span className="font-display font-semibold text-foreground">
