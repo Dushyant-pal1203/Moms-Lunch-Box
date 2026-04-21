@@ -1,0 +1,235 @@
+export type Category = "All" | "Thali" | "Rice" | "Roti" | "Special";
+
+export interface MenuItem {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  priceNum: number;
+  category: Category;
+  tag: string;
+  tagColor: string;
+  image: string;
+  imageAlt?: string;
+  bestseller?: boolean;
+  spicy?: boolean;
+}
+
+export const menuItems: MenuItem[] = [
+  {
+    id: 1,
+    name: "Full Veg Thali",
+    description: "2 Roti, Dal, Sabzi (seasonal), Rice, Salad & Pickle",
+    price: "₹80",
+    priceNum: 80,
+    category: "Thali",
+    tag: "Best Seller",
+    tagColor: "bg-amber-500 text-white",
+    image: "/menu-images/full-veg-thali.png",
+    imageAlt: "Full Veg Thali with roti, dal, sabzi and rice",
+    bestseller: true,
+  },
+  {
+    id: 2,
+    name: "Paneer Special Thali",
+    description: "2 Roti, Paneer Sabzi, Dal Tadka, Rice, Salad & Sweet",
+    price: "₹100",
+    priceNum: 100,
+    category: "Thali",
+    tag: "Popular",
+    tagColor: "bg-rose-500 text-white",
+    image: "/menu-images/paneer-special-thali.png",
+    imageAlt: "Paneer Special Thali with paneer sabzi and rice",
+  },
+  {
+    id: 3,
+    name: "Mini Thali",
+    description: "1 Roti, Dal, Sabzi & Rice — perfect for light meals",
+    price: "₹55",
+    priceNum: 55,
+    category: "Thali",
+    tag: "Budget Friendly",
+    tagColor: "bg-sky-500 text-white",
+    image: "/menu-images/mini-thali.png",
+    imageAlt: "Mini Thali with limited portions",
+  },
+  {
+    id: 4,
+    name: "Dal Rice",
+    description: "Homestyle dal with steamed rice, pickle & papad",
+    price: "₹50",
+    priceNum: 50,
+    category: "Rice",
+    tag: "Classic",
+    tagColor: "bg-stone-600 text-white",
+    image: "/menu-images/dal-rice.png",
+    imageAlt: "Dal Rice with dal and steamed rice",
+  },
+  {
+    id: 5,
+    name: "Rajma Chawal",
+    description: "Slow-cooked kidney beans with jeera rice & salad",
+    price: "₹65",
+    priceNum: 65,
+    category: "Rice",
+    tag: "Fan Favourite",
+    tagColor: "bg-violet-600 text-white",
+    image: "/menu-images/rajma-chawal.png",
+    imageAlt: "Rajma Chawal with kidney beans curry and rice",
+  },
+  {
+    id: 6,
+    name: "Chole Chawal",
+    description: "Spiced chickpea curry with steamed basmati rice",
+    price: "₹65",
+    priceNum: 65,
+    category: "Rice",
+    tag: "Spicy",
+    tagColor: "bg-red-500 text-white",
+    image: "/menu-images/chole-chawal.png",
+    imageAlt: "Chole Chawal with chickpea curry and rice",
+    spicy: true,
+  },
+  {
+    id: 7,
+    name: "Roti + Dal Combo",
+    description: "2 soft rotis with homestyle dal and a small salad",
+    price: "₹45",
+    priceNum: 45,
+    category: "Roti",
+    tag: "Classic",
+    tagColor: "bg-stone-600 text-white",
+    image: "/menu-images/roti-dal.png",
+    imageAlt: "Roti with dal and salad",
+  },
+  {
+    id: 8,
+    name: "Roti + Sabzi Combo",
+    description: "2 rotis with fresh seasonal vegetable sabzi",
+    price: "₹50",
+    priceNum: 50,
+    category: "Roti",
+    tag: "Healthy",
+    tagColor: "bg-emerald-600 text-white",
+    image: "/menu-images/roti-sabzi.png",
+    imageAlt: "Roti with seasonal vegetable sabzi",
+  },
+  {
+    id: 9,
+    name: "Aloo Paratha Combo",
+    description: "2 stuffed aloo parathas with dahi & homemade achaar",
+    price: "₹60",
+    priceNum: 60,
+    category: "Special",
+    tag: "Breakfast/Lunch",
+    tagColor: "bg-orange-500 text-white",
+    image: "/menu-images/aloo-parathas.png",
+    imageAlt: "Aloo Paratha with yogurt and pickle",
+    bestseller: true,
+  },
+  {
+    id: 10,
+    name: "Paneer Bhurji + Roti",
+    description: "Spiced scrambled paneer with 2 rotis & green chutney",
+    price: "₹80",
+    priceNum: 80,
+    category: "Special",
+    tag: "High Protein",
+    tagColor: "bg-indigo-500 text-white",
+    image: "/menu-images/paneer-bhurji.png",
+    imageAlt: "Paneer Bhurji with roti and chutney",
+    spicy: true,
+  },
+  {
+    id: 11,
+    name: "Khichdi + Kadhi",
+    description: "Comforting dal-rice khichdi with tangy kadhi & papad",
+    price: "₹55",
+    priceNum: 55,
+    category: "Special",
+    tag: "Comfort Food",
+    tagColor: "bg-teal-600 text-white",
+    image: "/menu-images/khichdi-kadhi.png",
+    imageAlt: "Khichdi with kadhi and papad",
+  },
+  {
+    id: 12,
+    name: "Weekly Pack (5 days)",
+    description:
+      "Hot homemade lunch every weekday Mon–Fri. Full Veg Thali. Save big!",
+    price: "₹350",
+    priceNum: 350,
+    category: "Special",
+    tag: "Best Value",
+    tagColor: "bg-primary text-primary-foreground",
+    image: "/menu-images/weekday-pack.png",
+    imageAlt: "Weekly meal pack containing 5 thalis",
+    bestseller: true,
+  },
+];
+
+export const categories: Category[] = [
+  "All",
+  "Thali",
+  "Rice",
+  "Roti",
+  "Special",
+];
+export const categoryEmojis: Record<Category, string> = {
+  All: "🍽️",
+  Thali: "🍛",
+  Rice: "🍚",
+  Roti: "🫓",
+  Special: "⭐",
+};
+
+export const menuPreviews = [
+  {
+    name: "Full Veg Thali",
+    emoji: "🍛",
+    price: "₹80",
+    tag: "Best Seller",
+    tagColor: "bg-amber-500 text-white",
+    desc: "2 Roti + Dal + Sabzi + Rice + Salad",
+  },
+  {
+    name: "Rajma Chawal",
+    emoji: "🫘",
+    price: "₹65",
+    tag: "Fan Favourite",
+    tagColor: "bg-rose-500 text-white",
+    desc: "Slow-cooked kidney beans with jeera rice",
+  },
+  {
+    name: "Paneer Thali",
+    emoji: "🧀",
+    price: "₹100",
+    tag: "Popular",
+    tagColor: "bg-primary text-primary-foreground",
+    desc: "Paneer Sabzi + Dal Tadka + Rice + Sweet",
+  },
+  {
+    name: "Aloo Paratha",
+    emoji: "🥞",
+    price: "₹60",
+    tag: "Breakfast/Lunch",
+    tagColor: "bg-orange-500 text-white",
+    desc: "2 stuffed parathas with dahi & achaar",
+  },
+  {
+    name: "Weekly Pack",
+    emoji: "📦",
+    price: "₹350",
+    tag: "Best Value",
+    tagColor: "bg-teal-600 text-white",
+    desc: "5 days of hot homemade lunch — Mon to Fri",
+  },
+  {
+    name: "Khichdi + Kadhi",
+    emoji: "🫕",
+    price: "₹55",
+    tag: "Comfort Food",
+    tagColor: "bg-violet-600 text-white",
+    desc: "Comforting dal-rice with tangy kadhi",
+  },
+];
