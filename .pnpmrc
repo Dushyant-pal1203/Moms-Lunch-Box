@@ -1,0 +1,6 @@
+auto-install-peers=true
+strict-peer-dependencies=false
+shamefully-hoist=true
+public-hoist-pattern[]=*
+node-linker=hoisted
+resolution-mode=highest
